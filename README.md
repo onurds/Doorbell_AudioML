@@ -20,9 +20,61 @@ This two-part project implements a real-time audio classification system running
 - Android device for notification reception (Second part of the project)
 
 
-### Configure Firebase credentials:
+### Python Dependencies
+```bash
+pip install numpy pandas librosa tensorflow sounddevice pygame firebase-admin
+```
+
+## Setup Guide
+
+### Part 1: Raspberry Pi Setup
+
+1. Install required Python packages:
+```bash
+sudo apt-get update
+sudo apt-get install python3-pip portaudio19-dev
+pip3 install numpy sounddevice librosa tensorflow firebase-admin scikit-learn
+```
+
+2. Set up the service:
+```bash
+# Copy the service file
+sudo cp doorbell.service /etc/systemd/system/
+
+# Reload systemd
+sudo systemctl daemon-reload
+
+# Enable and start the service
+sudo systemctl enable doorbell
+sudo systemctl start doorbell
+
+# Check the service status
+sudo systemctl status doorbell
+
+```
+
+### Part 2: Project Setup
+
+3. Train the model:
+```bash
+python train_model.py
+```
+
+4. Configure Firebase credentials:
 - Download your Firebase service account key
-- Place it on config folder
+- Place it on the config folder
+- Change the paths on python files
+
+5. Start the detection system:
+```bash
+python raspberry_pi.py
+```
+
+Alternative for desktops using keras:
+```bash
+python keras_doorbell_detector.py
+```
+
 
 ### Audio Processing Parameters
 - Sample Rate: 22050 Hz
@@ -32,11 +84,6 @@ This two-part project implements a real-time audio classification system running
 - FFT Window Size: 1024 samples
 - Hop Length: 512 samples
 
-## Screenshots
-
-
-### Android App
-![Android Interface](path/to/android_interface.png)
 
 ## License
 
