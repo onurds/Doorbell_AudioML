@@ -1,0 +1,17 @@
+[Unit]
+Description=Doorbell Detection Service
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/doorbell
+Environment=PYTHONPATH=/home/pi/doorbell
+ExecStart=/usr/bin/python3 /home/pi/doorbell/raspberry_pi.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/pi/doorbell/logs/doorbell.log
+StandardError=append:/home/pi/doorbell/logs/doorbell.log
+
+[Install]
+WantedBy=multi-user.target
